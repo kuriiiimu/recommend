@@ -1,9 +1,7 @@
 <?php
 //PDO接続
-$dsn = 'mysql:dbname=recommend;host=localhost';
-$user = 'root';
-$password = 'wjinka';
-$pdo = new PDO($dsn,$user,$password);
+require_once("connection.php");
+$pdo = db_connection();
 
 //ユーザーの志望ゼミを取得
 $user_zemis = [];
@@ -14,11 +12,7 @@ $user_zemis = array(
 );
 //DBからuser_zemis[zemi1]と同じゼミを第１志望にしているユーザーを取得
 $stmt = $pdo->query("SELECT classes.user_id, classes.class1, classes.class2, classes.class3, classes.class4, classes.class5 FROM classes INNER JOIN zemis ON classes.user_id = zemis.user_id WHERE zemis.zemi1 = $user_zemis[zemi1]");
-$classIdsByZemi1 = $stmt->fetchAll(PDO::ASSOC);
-//user_idから、好きな授業を取得
-//N+1なんとかしてくれ
-//$stmt = $pdo->query("SELECT * FROM classes WHERE user_id = $userIdsByZemi1")
-//$classIdsByZemi1 = $stmt->fetchAll(PDO::ASSOC);
+$classIdsByZemi1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 var_dump($classIdsByZemi1);
 //
