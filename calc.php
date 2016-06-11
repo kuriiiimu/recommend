@@ -11,6 +11,7 @@ $user_zemis = array(
     'zemi3' => 3
 );
 $sum = array();
+//ユーザーが登録した志望ゼミを第１志望ゼミにしている登録済みデータを取りだし、その重み付け後の値を作る
 foreach($user_zemis as $user_zemi){
     //foreachで回している回数を取る
     $i = 0;
