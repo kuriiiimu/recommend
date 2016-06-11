@@ -67,20 +67,18 @@ foreach($user_zemis as $user_zemi){
     }
     $i ++;
 }
-var_dump($sum);
+//var_dump($sum);
 //resultから5件だけを確率で取得
 //度数の合計
 $total = 0;
 $weightedClasses = [];
-foreach($sum as $item){
+foreach($sum as $key => $item){
     $total = $total + $item;
-    $weightedClasses = array(
-        array(
-            'class_id' => $key,
-            'weight'   => $total
-        )
+    $weightedClasses[] = array(
+        'class_id' => $key,
+        'weight'   => $total
     );
 }
-var_dump($weightedClasses);
+//var_dump($weightedClasses);
 
 
