@@ -68,17 +68,32 @@ foreach($user_zemis as $user_zemi){
     $i ++;
 }
 //var_dump($sum);
-//resultから5件だけを確率で取得
-//度数の合計
-$total = 0;
-$weightedClasses = [];
-foreach($sum as $key => $item){
-    $total = $total + $item;
-    $weightedClasses[] = array(
-        'class_id' => $key,
-        'weight'   => $total
-    );
+//sumから5件だけを確率で取得
+//重みの合計を出し１から合計までランダム。該当する授業のclass_idを取る
+$choosedClasses = array();
+for($j = 0; $j < 5; $j ++){
+    $total = 0;
+    $weightedClasses = [];
+    foreach($sum as $key => $item){
+        $total = $total + $item;
+        $weightedClasses[] = array(
+            'class_id' => $key,
+            'weight'   => $total
+        );
+    }
+    //var_dump($weightedClasses);
+    $choose = 0;
+    $choose = rand(1,$total);
+    foreach($weightedClasses as $item){
+        if($item['weight'] >= $choose){
+            $choosedClasses[] = $item['class_id'];
+            unset($sum[$item['class_id']]);
+            //var_dump($choose);
+            break;
+        }
+    }
 }
-//var_dump($weightedClasses);
+//var_dump($choosedClasses);
+
 
 
